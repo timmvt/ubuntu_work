@@ -1,0 +1,35 @@
+To install on Ubuntu, follow the steps given in the installation guide. For convenience sake I have put them below.
+
+(1) Install Vagrant (https://www.vagrantup.com/downloads.html)
+    (a) ...]# vagrant plugin install vagrant-vbguest
+(2) Install VirtualBox (https://www.virtualbox.org/wiki/Downloads)
+(3) Install Git (http://www.git-scm.com/)
+(4) Clone the VistA repository
+    (a) ...]# cd ~
+    (b) ...]# mkdir Development
+    (c) ...]# cd Development
+    (d) ...]# git clone https://github.com/OSEHRA/VistA.git
+(5) Provision the vista development environment VM
+    (a) ...]# cd Development/VistA/Scripts/Install/Ubuntu
+    (b) ...]# vagrant up
+        [NOTE: VistA will run through the process of setting up the box and might kick back with a shared folders error. See the error below.
+		Failed to mount folders in Linux guest. This is usually because
+		the "vboxsf" file system is not available. Please verify that
+		the guest additions are properly installed in the guest and can
+	    	work properly. The command attempted was:
+
+		mount -t vboxsf -o uid=`id -u vagrant`,gid=`getent group vagrant | cut -d: -f3` /vagrant /vagrant
+		mount -t vboxsf -o uid=`id -u vagrant`,gid=`id -g vagrant` /vagrant /vagrant
+
+       SOLUTION:
+	After this error occurs, the process exits and the command prompt is back on the screen. Type the following:
+		...]# vagrant ssh
+		[guest_box...]# sudo ln -s /opt/VBoxGuestAdditions-4.3.10/lib/VBoxGuestAdditions /usr/lib/VBoxGuestAdditions
+		[guest_box...]# exit
+		...]# vagrant reload
+
+(6) Done!  
+
+Posting a log of my output below:
+
+		
